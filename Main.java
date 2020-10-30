@@ -5,7 +5,10 @@ import java.awt.event.*;
 public class Main implements Runnable, ActionListener{
 
   // Class Variables  
-  
+  JLabel outputName;
+  JTextField insertName;
+  JButton sayHello;
+  JPanel mainPanel;
 
 
   // Method to assemble our GUI
@@ -18,16 +21,33 @@ public class Main implements Runnable, ActionListener{
     frame.setSize(800,600);
     // shows the window
     frame.setVisible(true);
- 
+ //initialize the main JPanel
+    mainPanel = new JPanel();
+    //disable layout helpers
+    mainPanel.setLayout(null);
+    sayHello = new JButton("Say Hello");
+    sayHello.setBounds(250,350,200,50);
+    sayHello.addActionListener(this);
+    sayHello.setActionCommand("Say Hello");
+    outputName = new JLabel();
+    outputName.setBounds(150,250,400,50);
+    insertName = new JTextField();
+    insertName.setBounds(150,150,400,50);
+    mainPanel.add(sayHello);
+    mainPanel.add(outputName);
+    mainPanel.add(insertName);
+    frame.add(mainPanel);
     
-
   }
 
   // method called when a button is pressed
   public void actionPerformed(ActionEvent e){
     // get the command from the action
     String command = e.getActionCommand();
-
+  if(command.equals("Say Hello")){
+     String name = insertName.getText();
+     outputName.setText("Hello " + name);
+  }
   }
 
   // Main method to start our program
